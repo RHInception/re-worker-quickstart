@@ -37,3 +37,5 @@ sed -e "s/{{author_email}}/${author_email}/" \
     -e "s/{{worker_long_description}}/${long_description}/" \
     -e "s/{{worker_name}}/${worker_name_lower}/" \
     -e "s/{{Worker_Name}}/${Worker_Name_Camel}/" templates/re-worker-quickstart.spec > contrib/rpm/re-worker-${worker_name_lower}.spec
+
+echo "${author_name} <${author_email}>" > AUTHORS
