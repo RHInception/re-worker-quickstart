@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-Satellite 5 worker.
+{{Worker_Name}} worker.
 """
 
 import xmlrpclib
@@ -22,16 +22,16 @@ import xmlrpclib
 from reworker.worker import Worker
 
 
-class Satellite5WorkerError(Exception):
+class {{Worker_Name}}WorkerError(Exception):
     """
-    Base exception class for Satellite5Worker errors.
+    Base exception class for {{Worker_Name}}Worker errors.
     """
     pass
 
 
-class Satellite5Worker(Worker):
+class {{Worker_Name}}Worker(Worker):
     """
-    Worker which provides basic RPM promotion capabilities
+    {{worker_short_description}}
     """
 
     #: allowed subcommands
@@ -60,7 +60,7 @@ class Satellite5Worker(Worker):
         """Verify we were supplied with a valid subcommand"""
         subcmd = parameters.get('subcommand', None)
         if subcmd not in self.subcommands:
-            raise Satellite5WorkerError("Invalid subcommand provided: %s" % subcmd)
+            raise {{Worker_Name}}WorkerError("Invalid subcommand provided: %s" % subcmd)
         else:
             return True
 
@@ -76,7 +76,7 @@ Promote parameters.
         for key in self.dynamic:
             if key not in params:
                 # Required key not provided
-                raise Satellite5WorkerError("A required key was not provided: %s" % key)
+                raise {{Worker_Name}}WorkerError("A required key was not provided: %s" % key)
 
         # Got everything we need
         return True
@@ -90,10 +90,10 @@ Promote parameters.
             # print key
         except xmlrpclib.Fault, fault:
             if fault.faultCode == 2950:
-                raise Satellite5WorkerError("Could not authenticate with the Satellite server: %s" %
+                raise {{Worker_Name}}WorkerError("Could not authenticate with the Satellite server: %s" %
                                             str(fault))
             else:
-                raise Satellite5WorkerError("Error connecting to the Satellite server: %s" %
+                raise {{Worker_Name}}WorkerError("Error connecting to the Satellite server: %s" %
                                             str(fault))
         else:
             return (client, key)
@@ -112,7 +112,7 @@ Promote parameters.
             not_found.append("Destination: %s" % source)
 
         if not_found:
-            raise Satellite5WorkerError("Could not locate channel(s): %s" %
+            raise {{Worker_Name}}WorkerError("Could not locate channel(s): %s" %
                                         ",".join(not_found))
         else:
             return True
@@ -124,7 +124,7 @@ Returns the count of the number of packages promoted"""
         try:
             result = client.channel.software.mergePackages(key, source, destination)
         except xmlrpclib.Fault, fault:
-            raise Satellite5WorkerError("Could not promote: %s" % str(fault))
+            raise {{Worker_Name}}WorkerError("Could not promote: %s" % str(fault))
         else:
             return len(result)
 
@@ -133,7 +133,7 @@ Returns the count of the number of packages promoted"""
         try:
             client.auth.logout(key)
         except Exception, e:
-            raise Satellite5WorkerError("Unknown error while logging out: %s" % str(e))
+            raise {{Worker_Name}}WorkerError("Unknown error while logging out: %s" % str(e))
         else:
             return True
 
@@ -209,7 +209,7 @@ Returns the count of the number of packages promoted"""
             output.info('Satellite 5 worker finished promoting channel '
                         'contents (count: %s)' % result)
 
-        except Satellite5WorkerError, s5we:
+        except {{Worker_Name}}WorkerError, s5we:
             # If an error happens send a failure and log it to stdout
             self.app_logger.error('Failure: %s' % s5we)
             # Send a message to the FSM indicating a failure event took place
@@ -231,7 +231,7 @@ Returns the count of the number of packages promoted"""
 
 def main():  # pragma: no cover
     from reworker.worker import runner
-    runner(Satellite5Worker)
+    runner({{Worker_Name}}Worker)
 
 
 if __name__ == '__main__':  # pragma nocover

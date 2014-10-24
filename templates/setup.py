@@ -26,18 +26,18 @@ except ImportError:
 
 
 setup(
-    name='reworkersatellite5',
-    version='0.1.0',
-    description='',
+    name='reworker{{worker_name}}',
+    version='0.0.1',
+    description='{{worker_short_description}}',
     author='See AUTHORS file',
     author_email='inception@redhat.com',
-    url='https://github.com/rhinception/re-worker-satellite5',
+    url='https://github.com/rhinception/re-worker-{{worker_name}}',
     license='AGPLv3',
     package_dir={'replugin': 'replugin'},
-    packages=['replugin', 'replugin.satellite5worker'],
+    packages=['replugin', 'replugin.{{worker_name}}worker'],
     entry_points={
         'console_scripts': [
-            're-worker-satellite5 = replugin.satellite5worker:main',
+            're-worker-{{worker_name}} = replugin.{{worker_name}}worker:main',
         ],
     }
 )

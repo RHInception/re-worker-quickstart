@@ -1,6 +1,6 @@
 ########################################################
 
-# Makefile for re-worker-satellite5
+# Makefile for re-worker-{{worker_name}}
 #
 # useful targets (not all implemented yet!):
 #   make clean               -- Clean up garbage
@@ -22,12 +22,12 @@
 ########################################################
 
 
-NAME := re-worker-satellite5
+NAME := re-worker-{{worker_name}}
 SHORTNAME := replugin
 TESTPACKAGE := replugin
 
 RPMSPECDIR := ./contrib/rpm/
-RPMSPEC := $(RPMSPECDIR)/re-worker-satellite5.spec
+RPMSPEC := $(RPMSPECDIR)/re-worker-{{worker_name}}.spec
 
 sdist: clean
 	python setup.py sdist
@@ -78,7 +78,7 @@ unittests:
 clean:
 	@find . -type f -regex ".*\.py[co]$$" -delete
 	@find . -type f \( -name "*~" -or -name "#*" \) -delete
-	@rm -fR build dist rpm-build MANIFEST htmlcov .coverage $(SHORTNAME).egg-info reworkersatellite5.egg-info
+	@rm -fR build dist rpm-build MANIFEST htmlcov .coverage $(SHORTNAME).egg-info reworker{{worker_name}}.egg-info
 	@rm -rf $(NAME)env
 
 pep8:
@@ -108,7 +108,7 @@ srpm: rpmcommon
 	-bs $(RPMSPEC)
 	@echo "#############################################"
 	@echo "Re-Core SRPM is built:"
-	@find rpm-build -maxdepth 2 -name 're-worker-satellite5*src.rpm' | awk '{print "    " $$1}'
+	@find rpm-build -maxdepth 2 -name 're-worker-{{worker_name}}*src.rpm' | awk '{print "    " $$1}'
 	@echo "#############################################"
 
 rpm: rpmcommon
@@ -121,5 +121,5 @@ rpm: rpmcommon
 	-ba $(RPMSPEC)
 	@echo "#############################################"
 	@echo "Re-Core RPMs are built:"
-	@find rpm-build -maxdepth 2 -name 're-worker-satellite5*.rpm' | awk '{print "    " $$1}'
+	@find rpm-build -maxdepth 2 -name 're-worker-{{worker_name}}*.rpm' | awk '{print "    " $$1}'
 	@echo "#############################################"

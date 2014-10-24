@@ -5,17 +5,17 @@
 %endif
 
 %global _pkg_name replugin
-%global _src_name reworkersatellite5
+%global _src_name reworker{{worker_name}}
 
-Name: re-worker-satellite5
-Summary: Winternewt Satellite5 Worker
+Name: re-worker-{{worker_name}}
+Summary: Winternewt {{Worker_Name}} Worker
 Version: 0.1.0
 Release: 2%{?dist}
 
 Group: Applications/System
 License: AGPLv3
 Source0: %{_src_name}-%{version}.tar.gz
-Url: https://github.com/rhinception/re-worker-satellite5
+Url: https://github.com/rhinception/re-worker-{{worker_name}}
 
 BuildArch: noarch
 BuildRequires: python2-devel
@@ -24,8 +24,7 @@ Requires: re-worker
 Requires: python-setuptools
 
 %description
-Worker capable of promoting RPMs between different channels in Red Hat
-Satellite 5.
+{{worker_long_description}}
 
 %prep
 %setup -q -n %{_src_name}-%{version}
@@ -34,20 +33,14 @@ Satellite 5.
 %{__python2} setup.py build
 
 %install
-%{__python2} setup.py install -O1 --root=$RPM_BUILD_ROOT --record=re-worker-satellite5-files.txt
+%{__python2} setup.py install -O1 --root=$RPM_BUILD_ROOT --record=re-worker-{{worker_name}}-files.txt
 
-%files -f re-worker-satellite5-files.txt
+%files -f re-worker-{{worker_name}}-files.txt
 %defattr(-, root, root)
 %doc README.md LICENSE AUTHORS
 %dir %{python2_sitelib}/%{_pkg_name}
 %exclude %{python2_sitelib}/%{_pkg_name}/__init__.py*
 
 %changelog
-* Thu Oct 23 2014 Tim Bielawa <tbielawa@redhat.com> - 0.1.0-2
-- Fix missing 'session key' parameter in mergePackages call
-
-* Tue Oct 21 2014 Tim Bielawa <tbielawa@redhat.com> - 0.1.0-1
-- Code-complete
-
-* Mon Oct 20 2014 Tim Bielawa <tbielawa@redhat.com> - 0.0.1-1
+* {{date}} {{author_name}} <{{author_email}}> - 0.0.1-1
 - First release
