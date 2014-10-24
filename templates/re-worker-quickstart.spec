@@ -9,8 +9,8 @@
 
 Name: re-worker-{{worker_name}}
 Summary: Winternewt {{Worker_Name}} Worker
-Version: 0.1.0
-Release: 2%{?dist}
+Version: 0.0.1
+Release: 1%{?dist}
 
 Group: Applications/System
 License: AGPLv3

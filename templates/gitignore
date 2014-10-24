@@ -36,9 +36,7 @@ nosetests.xml
 .project
 .pydevproject
 *~
-recore.log
 htmlcov
 MANIFEST
-re-coreenv/
 re-worker-{{worker_name}}env
 cover

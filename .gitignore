@@ -36,9 +36,6 @@ nosetests.xml
 .project
 .pydevproject
 *~
-recore.log
 htmlcov
 MANIFEST
-re-coreenv/
-re-worker-satellite5env
 cover
