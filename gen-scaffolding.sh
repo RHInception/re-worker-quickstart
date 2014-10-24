@@ -1,17 +1,56 @@
 #!/bin/bash
 set -u
 
+######################################################################
+#
+# CUSTOMIZE THE FOLLOWING VARIABLES TO YOUR PREFERENCE
+#
+######################################################################
 
-Worker_Name_Camel="TestWorker1"
-worker_name_lower=`echo ${Worker_Name_Camel} | tr '[[A-Z]]' '[[a-z]]'`
+######################################################################
+# This is your worker's name in CamelCase.
+#
+# DO NOT INCLUDE THE WORD "Worker" IN THIS VARIABLE NAME!!!
+#
+# DO NOT INCLUDE THE WORD "Worker" IN THIS VARIABLE NAME!!!
+#
+# DO NOT INCLUDE THE WORD "Worker" IN THIS VARIABLE NAME!!!
+Worker_Name_Camel="MyCoolThing"
+
+######################################################################
+# This is your worker's long description. It's used in the rpm spec file
+#
+# DO NOT INCLUDE NEW-LINE CHARACTERS IN THIS VARIABLE
+#
+# After you run this script you should word-wrap the %description
+# field in the generated spec file.
 long_description="Scaffolding for a new worker Scaffolding for a new worker Scaffolding for a new worker Scaffolding for a new worker"
+
+######################################################################
 short_description="Scaffolding for a new worker"
+
+######################################################################
+# Your name
 author_name="Some Person"
+
+######################################################################
+# Your email address
 author_email="some.person@example.com"
+
+######################################################################
+#
+# END CUSTOMIZATION
+#
+######################################################################
+
+
+
+######################################################################
+# Do not touch any variables after this point unless you know what
+# you're doing
+worker_name_lower=`echo ${Worker_Name_Camel} | tr '[[A-Z]]' '[[a-z]]'`
 build_date=`date "+%a %b %e %Y"`
-
 mkdir -p contrib/rpm/ replugin/${worker_name_lower}worker
-
 touch replugin/__init__.py
 touch requirements.txt
 
