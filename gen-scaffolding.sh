@@ -23,7 +23,7 @@ sed -e "s/{{worker_name}}/${worker_name_lower}/" \
 
 sed -e "s/{{worker_name}}/${worker_name_lower}/" templates/Makefile > Makefile
 
-sed -e "s/{{worker_name}}/${worker_name_lower}/" \
+sed -e "s/{{worker_name}}/${worker_name_lower}/g" \
     -e "s/{{worker_short_description}}/${short_description}/" templates/setup.py > setup.py
 
 sed -e "s/{{worker_short_description}}/${short_description}/" \
