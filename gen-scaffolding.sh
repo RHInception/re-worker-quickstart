@@ -54,21 +54,21 @@ mkdir -p contrib/rpm/ replugin/${worker_name_lower}worker
 touch replugin/__init__.py
 touch requirements.txt
 
-sed -e "s/{{worker_name}}/${worker_name_lower}/" \
+sed -e "s/{{worker_name}}/${worker_name_lower}/g" \
     -e "s/{{worker_short_description}}/${short_description}/" templates/README.md > README.md
 
-sed -e "s/{{worker_name}}/${worker_name_lower}/" \
-    -e "s/{{Worker_Name}}/${Worker_Name_Camel}/" templates/test_worker.py > test/test_${worker_name_lower}.py
+sed -e "s/{{worker_name}}/${worker_name_lower}/g" \
+    -e "s/{{Worker_Name}}/${Worker_Name_Camel}/g" templates/test_worker.py > test/test_${worker_name_lower}.py
 
-sed -e "s/{{worker_name}}/${worker_name_lower}/" templates/Makefile > Makefile
+sed -e "s/{{worker_name}}/${worker_name_lower}/g" templates/Makefile > Makefile
 
 sed -e "s/{{worker_name}}/${worker_name_lower}/g" \
     -e "s/{{worker_short_description}}/${short_description}/" templates/setup.py > setup.py
 
 sed -e "s/{{worker_short_description}}/${short_description}/" \
-    -e "s/{{Worker_Name}}/${Worker_Name_Camel}/" templates/worker-init.py > replugin/${worker_name_lower}worker/__init__.py
+    -e "s/{{Worker_Name}}/${Worker_Name_Camel}/g" templates/worker-init.py > replugin/${worker_name_lower}worker/__init__.py
 
-sed -e "s/{{worker_name}}/${worker_name_lower}/" templates/gitignore > .gitignore
+sed -e "s/{{worker_name}}/${worker_name_lower}/g" templates/gitignore > .gitignore
 
 sed -e "s/{{author_email}}/${author_email}/" \
     -e "s/{{author_name}}/${author_name}/" \
